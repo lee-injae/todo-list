@@ -1,255 +1,39 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>간단한 할 일 목록</title>
-
-    <!-- boostrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>To-do list</title>
 
     <!-- CSS -->
-    <style type="text/css">
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            line-height: 1.15;
-        }
-
-        .container {
-            padding: 1em;
-            margin-top: 1.5em;
-        }
-
-        .hero-text {
-            text-align: center;
-        }
-
-        .new-todo-form {
-            width: 60%;
-            margin-top: 0.5em;
-            margin-bottom: 2.5em;
-        }
-
-        .todo-input {
-            padding: 0.5em 1em;
-            margin-right: 1em;
-        }
-        
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log("loaded")
-            displayTodo()
-        })
-        
-        function displayTodo(){
-            fetch("/todo")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.items)
-                document.getElementById("todo-list").innerHTML = ""
-                data.items.forEach(itemObj => {
-                    const {todo, checked} = itemObj
-                    makeTodoList(todo, checked)
-                })
-            })
-        }
-
-        function makeTodoList(todoStr, checkedBool){
-
-            let textDecoration = checkedBool ? "line-through" : "none" 
-            let buttonDisplay = checkedBool ? "none" : "inline-block"
-
-            let tempHtml = `
-                    <li class="list-group-item d-flex justify-content-between align-items-center"
-                        >
-                        <span 
-                            class="todo-text"
-                            id="todo-text"
-                            style="text-decoration: ${textDecoration}"
-                            >
-                            ${todoStr}
-                        <span>
-                        <span>
-                            <button 
-                                class="btn btn-success btn-sm"
-                                onclick="checkTodo('${todoStr}')"
-                                style="display: ${buttonDisplay}"
-                                >
-                                완료
-                            </button>
-                            <button 
-                                class="btn btn-secondary btn-sm"
-                                onclick="editTodo(this, '${todoStr}')"
-                                style="display: ${buttonDisplay}"
-                                >
-                                수정
-                            </button>
-                            <button 
-                                class="btn btn-danger btn-sm"
-                                onclick="deleteTodo('${todoStr}')"
-                                >
-                                삭제
-                            </button>
-                        </span>
-                    </li>
-                    `
-            document.getElementById("todo-list").innerHTML += tempHtml
-        }
-
-        function postTodo(){
-            const todoInput = document.getElementById("todo-input")
-            const todoValue = todoInput.value 
-            if (!todoValue){
-                alert("할 일을 입력해주세요!")
-                return
-            }
-
-            let entry = {
-                todo_give: todoValue
-            }
-
-            fetch("/todo", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(entry) 
-            })
-            .then(res => res.json())
-            .then(data => {
-                alert(data.msg)
-                todoInput.value = ""
-                displayTodo()
-            })
-            
-        }
-
-        function checkTodo(todoStr){
-            let entry = { 
-                    todo_give: todoStr, 
-                }
-
-            fetch("/todo/checked", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(entry)
-            })
-            .then(res => res.json())
-            .then(data => {
-                alert(data.msg)
-                displayTodo()
-            });
-        }
-
-        function editTodo(buttonEl, todoStr){
-            let listItem = buttonEl.closest(".list-group-item")
-            let todoTextEl = listItem.querySelector("#todo-text")
-
-            let currentText = todoTextEl.textContent 
-
-            todoTextEl.innerHTML = `
-                <input type="text"
-                    id="edit-input" 
-                    class="edit-input"
-                    placeholder="${currentText}"
-                    >
-                <button 
-                    class="btn btn-secondary btn-sm"
-                    onclick="updateTodo('${todoStr}')""
-                    type=
-                    >
-                    업데이트
-                </button>
-                <button 
-                    class="btn btn-warning btn-sm"
-                    onclick="displayTodo()"
-                    >
-                    취소
-                    </button>
-            `
-        }
-
-        function updateTodo(originalTodoStr){
-            const updatedTodoStr = document.getElementById("edit-input").value
-    
-            if (!updatedTodoStr) {
-                alert("할 일을 입력해주세요!")
-                return
-            }
-
-            const entry = {
-                original_todo_give: originalTodoStr,
-                updated_todo_give: updatedTodoStr
-            }
-
-            fetch("/todo/edit", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(entry)
-            })
-            .then(res => res.json())
-            .then(data => {
-                alert(data.msg)
-                displayTodo()
-            })
-        }
-
-        function deleteTodo(todoStr){
-            let entry = {
-                todo_give: todoStr
-            }
-
-            fetch("todo/delete", {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(entry)
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log("delete-data", data)
-                alert(data.msg)
-                displayTodo()
-            })
-        }
-
-    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">   
 </head>
 <body>
     <div class="container">
         <div>
-            <h2 class="mb-4 hero-text">할 일 목록</h2>
+            <h2 class="mb-4 hero-text">To do list</h2>
         </div>
         <form class="new-todo-form">
             <input id="todo-input" 
                 class="todo-input"
                 type="text" 
-                placeholder="새 할 일"
+                placeholder="New todo item"
                 >
             <button 
                 type="button" 
                 class="btn btn-primary" 
                 onclick="postTodo()"
                 >
-                할 일 추가
+                Add
             </button>
         </form>
         <ul id="todo-list" class="list-group">
             <!-- each todo list item will be added here with <li> tag -->
         </ul>
     </div>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 
 </body>
 
