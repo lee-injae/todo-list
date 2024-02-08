@@ -7,16 +7,20 @@
 
     <title>To-do list</title>
 
-    <!-- CSS -->
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">   
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <div>
-            <h2 class="mb-4 hero-text">To do list</h2>
-        </div>
+        <h1 class="hero-text">my to-do list</h1>
+        
         <form class="new-todo-form">
-            <input id="todo-input" 
+            <input 
+                id="todo-input" 
                 class="todo-input"
                 type="text" 
                 placeholder="New todo item"
@@ -29,6 +33,7 @@
                 Add
             </button>
         </form>
+
         <ul id="todo-list" class="list-group">
             <!-- each todo list item will be added here with <li> tag -->
         </ul>

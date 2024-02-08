@@ -22,10 +22,10 @@ function makeTodoList(todoStr, checkedBool){
     let buttonDisplay = checkedBool ? "none" : "inline-block"
 
     let tempHtml = `
-            <li class="list-group-item d-flex justify-content-between align-items-center"
+            <li class="list-group-item"
                 >
                 <span 
-                    class="todo-text"
+                    class="todo-item"
                     id="todo-text"
                     style="text-decoration: ${textDecoration}"
                     >

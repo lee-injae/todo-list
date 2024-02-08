@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -17,12 +18,52 @@ body {
 }
 
 .new-todo-form {
-    width: 60%;
-    margin-top: 0.5em;
-    margin-bottom: 2.5em;
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    gap: 0.7em;
 }
 
 .todo-input {
-    padding: 0.5em 1em;
-    margin-right: 1em;
+    padding: 0.25em 0.5em;
+    font-size: 1.125rem;
+    border-radius: 5px;
+}
+
+.btn {
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 0.4em 1em;
+}
+
+.btn-primary {
+    background-color: green;
+}
+
+.btn-success {
+    background-color: blue;
+}
+
+.btn-secondary {
+    background-color: orange;
+}
+
+.btn-danger {
+    background-color: red;
+}
+
+.btn-sm {
+    padding: 0.2em 0.7em;
+}
+
+.list-group {
+    margin-top: 1em;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+@media (min-width: 480px) {
+
 }
