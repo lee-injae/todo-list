@@ -8,7 +8,7 @@ function displayTodo(){
     .then(res => res.json())
     .then(data => {
         console.log(data.items)
-        document.getElementById("todo-list").innerHTML = ""
+        document.getElementById("list-group").innerHTML = ""
         data.items.forEach(itemObj => {
             const {todo, checked} = itemObj
             makeTodoList(todo, checked)
@@ -22,16 +22,19 @@ function makeTodoList(todoStr, checkedBool){
     let buttonDisplay = checkedBool ? "none" : "inline-block"
 
     let tempHtml = `
-            <li class="list-group-item"
+            <li 
+                class="list-group-item"
                 >
                 <span 
                     class="todo-item"
-                    id="todo-text"
+                    id="todo-item"
                     style="text-decoration: ${textDecoration}"
                     >
                     ${todoStr}
-                <span>
-                <span>
+                </span>
+                <span 
+                    class="todo-item-btns"
+                    >
                     <button 
                         class="btn btn-success btn-sm"
                         onclick="checkTodo('${todoStr}')"
@@ -55,17 +58,19 @@ function makeTodoList(todoStr, checkedBool){
                 </span>
             </li>
             `
-    document.getElementById("todo-list").innerHTML += tempHtml
+            // const hey = document.getElementById("list-group")
+            // console.log(hey)
+            document.getElementById("list-group").innerHTML += tempHtml
+            
 }
 
 function postTodo(){
     const todoInput = document.getElementById("todo-input")
     const todoValue = todoInput.value 
     if (!todoValue){
-        alert("Pls add todo!")
+        alert("Pls add todo item")
         return
     }
-
     const entry = {
         todo_give: todoValue
     }
@@ -106,21 +111,21 @@ function checkTodo(todoStr){
 }
 
 function editTodo(buttonEl, todoStr){
-    let listItem = buttonEl.closest(".list-group-item")
-    let todoTextEl = listItem.querySelector("#todo-text")
+    const listItem = buttonEl.closest(".list-group-item")
+    const todoTextEl = listItem.querySelector("#todo-item")
 
-    let currentText = todoTextEl.textContent 
+    const currentText = todoTextEl.textContent 
 
     todoTextEl.innerHTML = `
-        <input type="text"
+        <input 
+            type="text"
             id="edit-input" 
             class="edit-input"
-            placeholder="${currentText}"
+            placeholder="'${currentText}'"
             >
         <button 
             class="btn btn-secondary btn-sm"
-            onclick="updateTodo('${todoStr}')""
-            type=
+            onclick="updateTodo('${todoStr}')"
             >
             update
         </button>
@@ -161,7 +166,7 @@ function updateTodo(originalTodoStr){
 }
 
 function deleteTodo(todoStr){
-    let entry = {
+    const entry = {
         todo_give: todoStr
     }
 

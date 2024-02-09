@@ -29,7 +29,7 @@ def post_item():
     
     db.items.insert_one(item)
 
-    return jsonify({"result": "success", "msg":"등록 완료!"})
+    return jsonify({"result": "success", "msg":"successfully added!"})
 
 
 @app.route("/todo", methods=["GET"])
@@ -60,7 +60,7 @@ def complete_todo():
 
     return jsonify({
         "result": "success", 
-        "msg": "할 일 체크 완료!"
+        "msg": "item completed!"
     })
 
 
@@ -79,7 +79,7 @@ def edit_todo():
 
     return jsonify({
         "result": "success",
-        "msg": "할 일 업데이트 완료!" 
+        "msg": "successfully updated" 
     })
 
 
@@ -92,7 +92,7 @@ def delete_items():
     })
     return jsonify({
         "result":"success",
-        "msg": "할 일 삭제 완료!"
+        "msg": "successfully deleted"
     })
 
 
