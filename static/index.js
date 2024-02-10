@@ -34,6 +34,7 @@ function makeTodoList(todoStr, checkedBool){
                 </span>
                 <span 
                     class="todo-item-btns"
+                    id="todo-item-btns"
                     >
                     <button 
                         class="btn btn-success btn-sm"
@@ -58,8 +59,7 @@ function makeTodoList(todoStr, checkedBool){
                 </span>
             </li>
             `
-            // const hey = document.getElementById("list-group")
-            // console.log(hey)
+
             document.getElementById("list-group").innerHTML += tempHtml
             
 }
@@ -68,7 +68,7 @@ function postTodo(){
     const todoInput = document.getElementById("todo-input")
     const todoValue = todoInput.value 
     if (!todoValue){
-        alert("Pls add todo item")
+        alert("Please add todo item")
         return
     }
     const entry = {
@@ -111,38 +111,50 @@ function checkTodo(todoStr){
 }
 
 function editTodo(buttonEl, todoStr){
+    console.log(buttonEl)
     const listItem = buttonEl.closest(".list-group-item")
     const todoTextEl = listItem.querySelector("#todo-item")
+    console.log(listItem)
+    console.log(todoTextEl)
 
     const currentText = todoTextEl.textContent 
 
-    todoTextEl.innerHTML = `
-        <input 
-            type="text"
-            id="edit-input" 
-            class="edit-input"
-            placeholder="'${currentText}'"
-            >
-        <button 
-            class="btn btn-secondary btn-sm"
-            onclick="updateTodo('${todoStr}')"
-            >
-            update
-        </button>
-        <button 
-            class="btn btn-warning btn-sm"
-            onclick="displayTodo()"
-            >
-            cancel
+    listItem.innerHTML = `
+        <span
+            class="edit-list-item"    
+        >
+            <input 
+                type="text"
+                id="edit-input" 
+                class="edit-input"
+                placeholder="${currentText}"
+                >
+            <button 
+                class="btn btn-secondary btn-sm"
+                onclick="updateTodo('${todoStr}')"
+                >
+                update
             </button>
+            <button 
+                class="btn btn-warning btn-sm"
+                onclick="displayTodo()"
+                >
+                cancel
+            </button>
+        </span>
     `
+    
+    // document.querySelectorAll("#todo-item-btns button").forEach(button => {
+    //     button.disabled = true
+    //     button.style.filter = "brightness(65%)"
+    // })
 }
 
 function updateTodo(originalTodoStr){
     const updatedTodoStr = document.getElementById("edit-input").value
-
+    console.log(updatedTodoStr)
     if (!updatedTodoStr) {
-        alert("pls write your todo  item!")
+        alert("Pleases write your todo  item!")
         return
     }
 

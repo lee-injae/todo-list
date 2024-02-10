@@ -29,7 +29,12 @@ def post_item():
     
     db.items.insert_one(item)
 
-    return jsonify({"result": "success", "msg":"successfully added!"})
+    return jsonify(
+        {
+            "result": "success", 
+            "msg":"item successfully added!"
+        }
+    )
 
 
 @app.route("/todo", methods=["GET"])

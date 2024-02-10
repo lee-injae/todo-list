@@ -11,7 +11,6 @@ body {
 .container {
     padding: 1em;
     margin: 0 auto;
-    margin-top: 1.5em;
     max-width: 800px;
 }
 
@@ -20,7 +19,7 @@ body {
 }
 
 .new-todo-form {
-    margin-top: 1em;
+    margin-top: .75em;
     display: flex;
     justify-content: center;
     gap: 0.7em;
@@ -32,6 +31,7 @@ body {
     border-radius: 5px;
 }
 
+/* Buttons */
 .btn {
     color: #ffffff;
     border-radius: 5px;
@@ -41,6 +41,11 @@ body {
 
 .btn-primary {
     background-color: green;
+}
+
+.btn-sm {
+    padding: 0.3em 0.7em;
+    font-size: 0.8rem;
 }
 
 .btn-success {
@@ -55,10 +60,10 @@ body {
     background-color: red;
 }
 
-.btn-sm {
-    padding: 0.3em 0.7em;
-    font-size: 0.8rem;
+.btn-warning {
+    background-color: darkgray;
 }
+
 
 .list-group {
     margin-top: 1em;
@@ -70,17 +75,17 @@ body {
 
 .list-group-item {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 7px;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-top: 0.25em;
 }
 
 .list-group-item::before {
     content: "•"; /* Unicode character for a bullet point */
     color: black; /* Or any color you prefer */
-    font-size: 20px; /* Adjust the size of the bullet point */
-    
+    font-size: 20px; /* Adjust the size of the bullet point */    
     /* No need for position:absolute; let it be a flex item */
     /* margin-right: 1em; */
 }
@@ -90,17 +95,21 @@ body {
     flex-grow: 1;
 }
 
+.edit-list-item {
+    justify-content: space-between;
+}
+
 .edit-input {
+    flex-grow: 1;
     text-indent: 5px;
-    direction: ltr;
     text-align: left !important;
 }
 
 .edit-input::placeholder {
     text-align: left;
     float: left;
-    color:pink;
 }
+
 
 
 
