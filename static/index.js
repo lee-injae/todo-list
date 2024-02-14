@@ -131,6 +131,7 @@ function editTodo(buttonEl, todoStr){
                 id="edit-input" 
                 class="edit-input"
                 placeholder="${currentText}"
+                onkeydown="updateTodo('${todoStr}', event)"
                 >
             <button 
                 class="btn btn-secondary btn-sm"
@@ -153,7 +154,10 @@ function editTodo(buttonEl, todoStr){
     // })
 }
 
-function updateTodo(originalTodoStr){
+function updateTodo(originalTodoStr, event){
+    if (event && event.keyCode !== 13) {
+        return
+    }
     const updatedTodoStr = document.getElementById("edit-input").value
     console.log(updatedTodoStr)
     if (!updatedTodoStr) {
