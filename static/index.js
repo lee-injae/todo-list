@@ -64,7 +64,11 @@ function makeTodoList(todoStr, checkedBool){
             
 }
 
-function postTodo(){
+function postTodo(event){
+    console.log("keydown")
+    if (event && event.keyCode !== 13) {
+        return
+    }
     const todoInput = document.getElementById("todo-input")
     const todoValue = todoInput.value 
     if (!todoValue){
@@ -88,7 +92,6 @@ function postTodo(){
         todoInput.value = ""
         displayTodo()
     })
-    
 }
 
 function checkTodo(todoStr){

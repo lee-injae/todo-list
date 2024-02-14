@@ -18,12 +18,15 @@
     <div class="container">
         <h1 class="hero-text">my to-do list</h1>
 
-        <form class="new-todo-form">
+        <form 
+            class="new-todo-form"
+            >
             <input 
                 id="todo-input" 
                 class="todo-input"
                 type="text" 
                 placeholder="New todo item"
+                onkeydown="postTodo(event)"
                 >
             <button 
                 type="button" 
