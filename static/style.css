@@ -11,7 +11,7 @@ body {
 .container {
     padding: 1em;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 700px;
 }
 
 .hero-text {
@@ -37,6 +37,18 @@ body {
     border-radius: 5px;
     border: none;
     padding: 0.5em 1em;
+}
+
+.btn:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+    transform: scale(1.05);
+}
+
+.btn:active, btn:focus{
+    transform: translateX(4px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease;
 }
 
 .btn-primary {
