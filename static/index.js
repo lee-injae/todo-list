@@ -17,7 +17,6 @@ function displayTodo(){
 }
 
 function makeTodoList(todoStr, checkedBool){
-
     let textDecoration = checkedBool ? "line-through" : "none" 
     let buttonDisplay = checkedBool ? "none" : "inline-block"
 
@@ -65,10 +64,10 @@ function makeTodoList(todoStr, checkedBool){
 }
 
 function postTodo(event){
-    console.log("keydown")
     if (event && event.keyCode !== 13) {
         return
     }
+
     const todoInput = document.getElementById("todo-input")
     const todoValue = todoInput.value 
     if (!todoValue){
@@ -114,12 +113,8 @@ function checkTodo(todoStr){
 }
 
 function editTodo(buttonEl, todoStr){
-    console.log(buttonEl)
     const listItem = buttonEl.closest(".list-group-item")
     const todoTextEl = listItem.querySelector("#todo-item")
-    console.log(listItem)
-    console.log(todoTextEl)
-
     const currentText = todoTextEl.textContent 
 
     listItem.innerHTML = `
@@ -147,19 +142,15 @@ function editTodo(buttonEl, todoStr){
             </button>
         </span>
     `
-    
-    // document.querySelectorAll("#todo-item-btns button").forEach(button => {
-    //     button.disabled = true
-    //     button.style.filter = "brightness(65%)"
-    // })
 }
 
 function updateTodo(originalTodoStr, event){
     if (event && event.keyCode !== 13) {
         return
     }
+
     const updatedTodoStr = document.getElementById("edit-input").value
-    console.log(updatedTodoStr)
+
     if (!updatedTodoStr) {
         alert("Pleases write your todo  item!")
         return

@@ -107,10 +107,6 @@ body {
     flex-grow: 1;
 }
 
-.edit-list-item {
-    /* width: 100%; */
-}
-
 .edit-input {
     flex-grow: 1;
     text-indent: 5px;
